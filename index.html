@@ -1,1 +1,1406 @@
-<link rel="stylesheet" href="styles.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operari | AI & SaaS Technology Company</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Enterprise Palette */
+            --primary: #0f172a; /* Deep Navy */
+            --primary-light: #1e293b;
+            --accent: #3b82f6; /* Tech Blue */
+            --accent-glow: #60a5fa;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --bg-body: #020617;
+            --bg-card: #0f172a;
+            --border: #334155;
+            --success: #10b981;
+            --danger: #ef4444;
+            
+            /* Dimensions */
+            --nav-height: 80px;
+            --container-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- Utilities --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border: 1px solid var(--accent);
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-glow);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background: rgba(2, 6, 23, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo span { color: var(--accent); }
+
+        /* Full Menu Visibility - No Hamburger */
+        .primary-nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            padding: 10px 16px;
+            border-radius: 4px;
+            position: relative;
+            display: inline-block;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: white;
+        }
+
+        /* Magnetic underline effect */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* Dropdowns */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            padding: 8px 0;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-glow);
+            padding-left: 25px;
+        }
+
+        /* Search Trigger */
+        .search-trigger {
+            color: var(--text-main);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 10px;
+            transition: transform 0.3s ease;
+        }
+        .search-trigger:hover { transform: scale(1.1); color: var(--accent); }
+
+        /* --- Main Layout --- */
+        main {
+            padding-top: var(--nav-height);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .page-section {
+            display: none;
+            padding: 80px 0;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Individual Page Animations */
+        .anim-fade-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .anim-fade-scale {
+            animation: fadeInScale 0.6s ease-out forwards;
+        }
+
+        .anim-slide-left {
+            animation: slideInLeft 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* --- 3D Tilted Cards System (Universal) --- */
+        .hero {
+            text-align: center;
+            padding: 100px 0 60px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Grid Wrapper */
+        .grid-3d {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            perspective: 1000px;
+            padding: 20px 0;
+        }
+
+        .card-3d-wrapper {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            cursor: pointer;
+        }
+
+        .card-3d {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 30px;
+            height: 100%;
+            transition: transform 0.1s ease-out, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        /* 3D Glow Effect */
+        .card-3d::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 16px;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+        .card-3d:hover::before { opacity: 1; }
+
+        /* 3D Content */
+        .card-content { z-index: 2; transform: translateZ(20px); }
+        
+        .card-3d h3 { 
+            font-size: 1.5rem; 
+            margin-bottom: 1rem; 
+            color: white; 
+            transform: translateZ(10px);
+        }
+        
+        .card-3d p { 
+            color: var(--text-muted); 
+            font-size: 0.95rem; 
+            margin-bottom: 20px; 
+            transform: translateZ(5px);
+        }
+
+        .card-3d img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transform: translateZ(15px);
+        }
+
+        .card-3d .icon-large {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            transform: translateZ(15px);
+            display: inline-block;
+        }
+
+        /* --- Generic Content --- */
+        .content-block {
+            background: var(--bg-card);
+            padding: 60px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            margin-bottom: 40px;
+        }
+
+        .content-block p { margin-bottom: 1.5rem; font-size: 1.1rem; color: #cbd5e1; }
+        .content-block ul { margin-top: 20px; padding-left: 20px; }
+        .content-block li { list-style-type: disc; color: var(--text-muted); margin-bottom: 10px; }
+
+        /* --- Search Overlay --- */
+        .search-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .search-overlay.active { opacity: 1; visibility: visible; }
+
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transform: translateY(-20px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .search-overlay.active .search-container { transform: translateY(0); }
+
+        .search-input-wrapper { display: flex; gap: 10px; }
+
+        .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            padding: 15px;
+            outline: none;
+        }
+
+        .search-submit {
+            background: var(--accent);
+            color: white;
+            border: none;
+            width: 50px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .search-submit:hover { background: var(--accent-glow); }
+
+        .search-meta {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .search-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .search-suggestions {
+            border-top: 1px solid var(--border);
+            margin-top: 10px;
+            display: none;
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+        }
+        .search-suggestions.active { display: block; }
+        .suggestion-item {
+            padding: 12px 15px;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+        .suggestion-item:hover { 
+            background: rgba(59, 130, 246, 0.1); 
+            color: var(--accent-glow); 
+        }
+
+        /* --- Footer --- */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 60px 0 30px;
+            background: #020617;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: var(--text-muted); font-size: 0.9rem; }
+        .footer-nav a:hover { color: white; }
+
+        .social-links { display: flex; gap: 20px; }
+        .social-links a { 
+            width: 40px; height: 40px; 
+            border-radius: 50%; 
+            background: rgba(255,255,255,0.05);
+            display: flex; align-items: center; justify-content: center;
+            color: #FFFFFF; 
+            transition: 0.3s;
+        }
+        .social-links a:hover { background: var(--accent); transform: translateY(-3px); }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* --- Toast Notification --- */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 16px 24px;
+            border-radius: 8px;
+            color: white;
+            z-index: 3000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.success { border-left: 4px solid var(--success); }
+        .toast.error { border-left: 4px solid var(--danger); }
+
+        /* --- Responsive --- */
+        @media (max-width: 1024px) {
+            .primary-nav { gap: 15px; }
+            .nav-link { font-size: 0.85rem; padding: 8px 10px; }
+            .logo { font-size: 1.2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-container { padding: 0 16px; }
+            .primary-nav {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 23, 42, 0.95);
+                border-top: 1px solid var(--border);
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: 10px 20px;
+                z-index: 1001;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; 
+            }
+            .primary-nav::-webkit-scrollbar { display: none; }
+            .nav-item { flex-shrink: 0; }
+            .search-trigger { position: absolute; top: 25px; right: 20px; z-index: 1002; }
+            main { padding-bottom: 100px; }
+            .dropdown-menu {
+                position: fixed;
+                bottom: 70px;
+                top: auto;
+                left: 0;
+                width: 100%;
+                border-radius: 12px 12px 0 0;
+                transform: translateY(100%);
+            }
+            .nav-item:hover .dropdown-menu { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <div class="logo" onclick="app.router('home')">
+                <i class="fa-solid fa-layer-group"></i> Operari<span>.</span>
+            </div>
+
+            <nav>
+                <ul class="primary-nav">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active" onclick="app.router('home')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="app.router('solutions')">Solutions <i class="fa-solid fa-chevron-down" style="font-size:0.7em;"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="app.router('sol-cloud')">Cloud Architecture</a></li>
+                            <li><a class="dropdown-item" onclick="app.router('sol-ai')">AI & Automation</a></li>
+                            <li><a class="dropdown-item" onclick="app.router('sol-security')">Cloud Security</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size:0.7em;"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="app.router('prod-citiapp')">CiTiApp</a></li>
+                            <li><a class="dropdown-item" onclick="app.router('prod-nexgen')">NexGen Cast</a></li>
+                            <li><a class="dropdown-item" onclick="app.router('prod-cogito')">Cogito</a></li>
+                            <li><a class="dropdown-item" onclick="app.router('prod-lumen')">Lumen</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="app.router('careers')">Careers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="app.router('about')">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="app.router('contact')">Contact Us</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="search-trigger" onclick="app.toggleSearch()">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- HOME SECTION -->
+        <section id="home" class="page-section active anim-fade-up">
+            <div class="container">
+                <div class="hero">
+                    <h1>Intelligent Digital Solutions<br>for Enterprise Growth</h1>
+                    <p class="section-subtitle">
+                        Operari is architecting a digital future, empowering organisations to make faster, smarter decisions through cutting-edge enterprise solutions powered by big data and AI.
+                    </p>
+                    <button class="btn btn-primary" onclick="app.router('solutions')">Explore Solutions</button>
+                </div>
+
+                <div class="grid-3d">
+                    <!-- Card 1 -->
+                    <div class="card-3d-wrapper" onclick="app.router('prod-citiapp')">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <img src="https://picsum.photos/seed/citiapp/400/300" alt="CiTiApp">
+                                <h3>CiTiApp</h3>
+                                <p>AI-powered citizen engagement platform for UK local councils, enabling faster issue resolution and smarter service delivery.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="card-3d-wrapper" onclick="app.router('prod-nexgen')">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <img src="https://picsum.photos/seed/nexgen/400/300" alt="NexGen Cast">
+                                <h3>NexGen Cast</h3>
+                                <p>Cloud-based podcast and video production platform for remote teams delivering broadcast-quality output without studios.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="card-3d-wrapper" onclick="app.router('prod-cogito')">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <img src="https://picsum.photos/seed/cogito/400/300" alt="Cogito">
+                                <h3>Cogito</h3>
+                                <p>The AI-powered core intelligence engine serving as cognitive backbone of Operari technology stack.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOLUTIONS OVERVIEW SECTION -->
+        <section id="solutions" class="page-section anim-fade-up">
+            <div class="container">
+                <h2 class="section-title">Our Solutions</h2>
+                <p class="section-subtitle">End-to-end technical capabilities designed to modernise infrastructure, automate processes, and secure assets.</p>
+
+                <div class="grid-3d">
+                    <!-- Solution Card 1: 3D Tilted -->
+                    <div class="card-3d-wrapper" onclick="app.router('sol-cloud')">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-cloud icon-large"></i>
+                                <h3>Cloud Architecture</h3>
+                                <p>We design and build scalable, secure, and high-performance cloud architectures that power modern enterprise applications.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Solution Card 2: 3D Tilted -->
+                    <div class="card-3d-wrapper" onclick="app.router('sol-ai')">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-brain icon-large"></i>
+                                <h3>AI & Automation</h3>
+                                <p>We deliver AI-powered automation and machine learning solutions that streamline operations and extract actionable insights.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Solution Card 3: 3D Tilted -->
+                    <div class="card-3d-wrapper" onclick="app.router('sol-security')">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-shield-halved icon-large"></i>
+                                <h3>Cloud Security</h3>
+                                <p>We provide enterprise-grade cloud security solutions that ensure data protection, regulatory compliance, and customer privacy.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOLUTIONS: CLOUD ARCHITECTURE -->
+        <section id="sol-cloud" class="page-section anim-slide-left">
+            <div class="container">
+                <h2 class="section-title">Cloud Architecture & Infrastructure</h2>
+                <div class="content-block">
+                    <p>We design and build scalable, secure, and high-performance cloud architectures that power modern enterprise applications. Our cloud solutions enable rapid growth, high availability, and seamless system integration across complex environments.</p>
+                </div>
+                <!-- 3D Cards -->
+                <div class="grid-3d">
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-network-wired icon-large"></i>
+                                <h3>Scalability</h3>
+                                <p>Architectures designed for elastic resource allocation and rapid business growth.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-server icon-large"></i>
+                                <h3>High Availability</h3>
+                                <p>Ensuring 99.9% uptime with robust failover and redundancy strategies.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-code-branch icon-large"></i>
+                                <h3>Seamless Integration</h3>
+                                <p>Connecting complex ecosystems with secure APIs and middleware.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="app.router('contact')">Discuss Your Infrastructure</button>
+            </div>
+        </section>
+
+        <!-- SOLUTIONS: AI & AUTOMATION -->
+        <section id="sol-ai" class="page-section anim-fade-scale">
+            <div class="container">
+                <h2 class="section-title">AI, Machine Learning & Automation</h2>
+                <div class="content-block">
+                    <p>We deliver AI-powered automation and machine learning solutions that streamline operations, reduce costs, and extract actionable insights from complex datasets. Our intelligent systems help organisations transition from reactive reporting to predictive, data-driven decision-making.</p>
+                </div>
+                <!-- 3D Cards -->
+                <div class="grid-3d">
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-microchip icon-large"></i>
+                                <h3>Predictive Analytics</h3>
+                                <p>Transitioning from reactive reporting to foresight-driven strategy.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-wand-magic-sparkles icon-large"></i>
+                                <h3>Operational Efficiency</h3>
+                                <p>Automating repetitive workflows to reduce overhead and human error.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-chart-line icon-large"></i>
+                                <h3>Actionable Insights</h3>
+                                <p>Unlocking hidden value in unstructured data for smarter decisions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="app.router('contact')">Explore AI Solutions</button>
+            </div>
+        </section>
+
+        <!-- SOLUTIONS: CLOUD SECURITY -->
+        <section id="sol-security" class="page-section anim-fade-up">
+            <div class="container">
+                <h2 class="section-title">Cloud Security & Compliance</h2>
+                <div class="content-block">
+                    <p>We provide enterprise-grade cloud security solutions that ensure data protection, regulatory compliance, and customer privacy. Our approach includes secure access controls, encryption, continuous monitoring, and governance frameworks built for mission-critical systems.</p>
+                </div>
+                <!-- 3D Cards -->
+                <div class="grid-3d">
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-file-shield icon-large"></i>
+                                <h3>Compliance</h3>
+                                <p>Ensuring adherence to GDPR, ISO, and industry-specific governance frameworks.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-lock icon-large"></i>
+                                <h3>Data Encryption</h3>
+                                <p>Advanced encryption protocols for data at rest and in transit.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-eye icon-large"></i>
+                                <h3>Continuous Monitoring</h3>
+                                <p>24/7 threat detection and automated incident response systems.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="app.router('contact')">Secure Your Data</button>
+            </div>
+        </section>
+
+        <!-- PRODUCT: CITIAPP -->
+        <section id="prod-citiapp" class="page-section anim-fade-up">
+            <div class="container">
+                <h2 class="section-title">CiTiApp</h2>
+                <p class="section-subtitle">Citizen Engagement & Local Government SaaS Platform</p>
+                <div class="content-block">
+                    <img src="https://picsum.photos/seed/citiapp/800/400" alt="CiTiApp Dashboard" style="border-radius:8px; margin-bottom:30px;">
+                    <p>CiTiApp is an AI-powered citizen engagement platform designed for UK local councils and public sector organisations. It enables faster issue resolution, improved transparency, and smarter service delivery.</p>
+                </div>
+                <!-- 3D Feature Cards -->
+                <div class="grid-3d">
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-mobile-screen icon-large"></i>
+                                <h3>Free Mobile App</h3>
+                                <p>Resident app with Voice, AI Chat, and Geo-location reporting.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-chart-pie icon-large"></i>
+                                <h3>Real-time Analytics</h3>
+                                <p>Live analytics, sentiment analysis, and AI-driven prioritisation.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-bolt icon-large"></i>
+                                <h3>Predictive Insights</h3>
+                                <p>Reduce resolution times by up to 40–60% with smart predictions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Explore Product Button -->
+                <div style="text-align: center; margin-top: 40px;">
+                    <button class="btn btn-primary" onclick="app.router('contact')">Explore Product</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCT: NEXGEN CAST -->
+        <section id="prod-nexgen" class="page-section anim-slide-left">
+            <div class="container">
+                <h2 class="section-title">NexGen Cast</h2>
+                <p class="section-subtitle">Remote Podcast & Video Production Platform</p>
+                <div class="content-block">
+                    <img src="https://picsum.photos/seed/nexgen/800/400" alt="NexGen Interface" style="border-radius:8px; margin-bottom:30px;">
+                    <p>NexGen Cast is a cloud-based podcast and video production platform built for remote teams, enterprises, and content-driven organisations. It delivers consistent, broadcast-quality output without need for studios.</p>
+                </div>
+                <!-- 3D Feature Cards -->
+                <div class="grid-3d">
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-video icon-large"></i>
+                                <h3>Local Recording</h3>
+                                <p>Local recording of uncompressed HD audio and video for quality.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-wand-magic-sparkles icon-large"></i>
+                                <h3>AI Post-Production</h3>
+                                <p>Noise reduction, transcription, and text-based editing.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-share-nodes icon-large"></i>
+                                <h3>Instant Publishing</h3>
+                                <p>Distribution to YouTube, Spotify, and Social instantly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Explore Product Button -->
+                <div style="text-align: center; margin-top: 40px;">
+                    <button class="btn btn-primary" onclick="app.router('contact')">Explore Product</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCT: COGITO -->
+        <section id="prod-cogito" class="page-section anim-fade-scale">
+            <div class="container">
+                <h2 class="section-title">Cogito</h2>
+                <p class="section-subtitle">AI-Powered Core Intelligence Engine</p>
+                <div class="content-block">
+                    <p>Cogito is an AI-powered core intelligence engine designed for commercial and enterprise applications. It serves as cognitive backbone of Operari technology stack.</p>
+                </div>
+                <!-- 3D Feature Cards -->
+                <div class="grid-3d">
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-database icon-large"></i>
+                                <h3>Data Ingestion</h3>
+                                <p>Rapidly ingests structured and unstructured data sources.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-link icon-large"></i>
+                                <h3>Hidden Correlations</h3>
+                                <p>Identifies patterns and trends invisible to manual analysis.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-chess-knight icon-large"></i>
+                                <h3>Strategic Planning</h3>
+                                <p>Delivers predictive analytics for operational optimisation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Explore Product Button -->
+                <div style="text-align: center; margin-top: 40px;">
+                    <button class="btn btn-primary" onclick="app.router('contact')">Explore Product</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCT: LUMEN -->
+        <section id="prod-lumen" class="page-section anim-fade-up">
+            <div class="container">
+                <h2 class="section-title">Lumen</h2>
+                <p class="section-subtitle">Data Visualisation & Analytics Platform</p>
+                <div class="content-block">
+                    <p>Lumen is an advanced data visualisation and analytics platform that transforms complex and dark data into clear, actionable intelligence.</p>
+                </div>
+                <!-- 3D Feature Cards -->
+                <div class="grid-3d">
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-table-columns icon-large"></i>
+                                <h3>Interactive Dashboards</h3>
+                                <p>Converts raw datasets into clear, visual dashboards.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-arrow-trend-up icon-large"></i>
+                                <h3>Trend Monitoring</h3>
+                                <p>Monitor performance and identify trends in real-time.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d-wrapper">
+                        <div class="card-3d" onmousemove="app.handleTilt(event, this)" onmouseleave="app.resetTilt(this)">
+                            <div class="card-content">
+                                <i class="fa-solid fa-gauge-high icon-large"></i>
+                                <h3>Actionable Intelligence</h3>
+                                <p>Act with clarity, speed, and confidence based on data.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Explore Product Button -->
+                <div style="text-align: center; margin-top: 40px;">
+                    <button class="btn btn-primary" onclick="app.router('contact')">Explore Product</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT US SECTION -->
+        <section id="about" class="page-section anim-fade-up">
+            <div class="container">
+                <!-- Update: Changed Title to AI & Big-Data Driven Technology Company (Capital D) -->
+                <h2 class="section-title">AI & Big-Data Driven Technology Company</h2>
+                <div class="content-block">
+                    <p>Operari is a UK-based technology company specialising in SaaS platforms, application development, artificial intelligence, and data analytics. Our mission is to help organisations unlock full value of their data through intelligent, scalable, and secure digital solutions.</p>
+                    <p>We work with both public and private sector organisations that depend on large and complex datasets to support high-quality research, operational efficiency, and service optimisation. Our clients include sector-wide bodies seeking digital transformation, data-driven growth, and strategic technology partnerships.</p>
+                    <p>Our proprietary technology rapidly ingests data from multiple structured and unstructured sources, identifying patterns, trends, correlations, and actionable insights. By applying advanced machine learning and analytics, we enable faster, more informed decision-making, surfacing intelligence that traditional systems and manual analysis often fail to uncover.</p>
+                </div>
+                <div class="grid-list" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                    <div class="info-card" style="text-align:center; padding:30px; background: var(--bg-card); border:1px solid var(--border); border-radius:12px;">
+                        <i class="fa-solid fa-shield-halved" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                        <h4>Enterprise Security</h4>
+                    </div>
+                    <div class="info-card" style="text-align:center; padding:30px; background: var(--bg-card); border:1px solid var(--border); border-radius:12px;">
+                        <i class="fa-solid fa-chart-line" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                        <h4>Data Driven</h4>
+                    </div>
+                    <div class="info-card" style="text-align:center; padding:30px; background: var(--bg-card); border:1px solid var(--border); border-radius:12px;">
+                        <i class="fa-solid fa-rocket" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                        <h4>Scalable Tech</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAREERS SECTION -->
+        <section id="careers" class="page-section anim-slide-left">
+            <div class="container">
+                <h2 class="section-title">Join Team</h2>
+                <div class="content-block">
+                    <p>We are always looking for talented individuals to join Operari. As a growing technology provider, we offer opportunities in software development, data science, cloud architecture, UI/UX design, and related disciplines.</p>
+                    <p>Current openings are available in our UK offices. We value innovation, integrity, and a passion for solving complex problems.</p>
+                    <p>If you are motivated and looking for a rewarding role, please send your CV to:</p>
+                    <p style="font-weight: 700; color: var(--accent);">contact@operari.co.uk</p>
+                </div>
+                <!-- Explore Career Opportunities Button -->
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-primary" onclick="app.router('contact')">Explore Career Opportunities</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="page-section anim-fade-up">
+            <div class="container">
+                <h2 class="section-title">Contact Us</h2>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                    <div class="content-block" style="margin:0;">
+                        <h3 style="color:white; margin-bottom:1rem;">Get in Touch</h3>
+                        <p>Whether you have a question about our products, need a demo, or want to discuss a partnership, our team is ready to help.</p>
+                        <p><strong>Email:</strong> contact@operari.co.uk</p>
+                        <p><strong>Location:</strong> United Kingdom</p>
+                    </div>
+                    <!-- Contact Form Submit Handler -->
+                    <form id="contactForm" class="content-block" style="margin:0; border: none; background: rgba(15,23,42,0.5);" onsubmit="app.handleContactSubmit(event)">
+                        <div style="margin-bottom: 20px;">
+                            <label style="display:block; color: var(--text-muted); margin-bottom:8px;">Name</label>
+                            <input type="text" required style="width:100%; padding:12px; background:rgba(0,0,0,0.3); border:1px solid var(--border); color:white; border-radius:4px;">
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display:block; color: var(--text-muted); margin-bottom:8px;">Email</label>
+                            <input type="email" required style="width:100%; padding:12px; background:rgba(0,0,0,0.3); border:1px solid var(--border); color:white; border-radius:4px;">
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display:block; color: var(--text-muted); margin-bottom:8px;">Message</label>
+                            <textarea rows="4" required style="width:100%; padding:12px; background:rgba(0,0,0,0.3); border:1px solid var(--border); color:white; border-radius:4px;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-container">
+            <div class="search-close" onclick="app.toggleSearch()">&times;</div>
+            <form id="searchForm" onsubmit="app.handleSearch(event)">
+                <div class="search-input-wrapper">
+                    <!-- Maxlength set to 27 as requested previously -->
+                    <input type="text" id="searchInput" class="search-input" maxlength="27" placeholder="Search (Max 27 chars)..." autocomplete="off">
+                    <button type="submit" class="search-submit"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+                <div class="search-meta">
+                    <span id="charCount">0 / 27</span>
+                    <span>Press Enter to search</span>
+                </div>
+                <!-- Search suggestions populated dynamically -->
+                <div class="search-suggestions" id="searchSuggestions">
+                    <!-- Items injected via JS -->
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo" style="font-size:1.2rem;">Operari<span>.</span></div>
+                
+                <nav class="footer-nav">
+                    <a href="#" onclick="app.router('about')">About Us</a>
+                    <a href="#" onclick="app.router('careers')">Careers</a>
+                    <a href="#" onclick="app.router('contact')">Contact Us</a>
+                    <a href="#">Privacy Policy</a>
+                </nav>
+
+                <div class="social-links">
+                    <!-- Twitter Icon -->
+                    <a href="#" target="_blank" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <!-- Instagram -->
+                    <a href="#" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <!-- LinkedIn -->
+                    <a href="#" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <!-- YouTube -->
+                    <a href="#" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <!-- Update: Changed Copyright Year to 2026 -->
+            <div class="copyright">
+                &copy; 2026 Operari. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toast" class="toast">
+        <i class="fa-solid fa-circle-info"></i>
+        <span id="toastMsg">Notification</span>
+    </div>
+
+    <script>
+        const app = {
+            state: {
+                currentPage: 'home'
+            },
+
+            // Search Data
+            searchData: [
+                { name: "CiTiApp", page: "prod-citiapp" },
+                { name: "NexGen Cast", page: "prod-nexgen" },
+                { name: "Cogito", page: "prod-cogito" },
+                { name: "Lumen", page: "prod-lumen" },
+                { name: "Cloud Architecture", page: "sol-cloud" },
+                { name: "AI & Automation", page: "sol-ai" },
+                { name: "Cloud Security", page: "sol-security" },
+                { name: "About Us", page: "about" },
+                { name: "Careers", page: "careers" },
+                { name: "Contact Us", page: "contact" }
+            ],
+
+            init: function() {
+                this.setupMagneticNav();
+                this.setupSearchInput();
+            },
+
+            // --- Routing Logic ---
+            router: function(pageId) {
+                // Hide all sections
+                document.querySelectorAll('.page-section').forEach(el => {
+                    el.classList.remove('active');
+                    // Reset animation by removing classes
+                    el.classList.remove('anim-fade-up', 'anim-fade-scale', 'anim-slide-left');
+                });
+                
+                // Show target
+                const target = document.getElementById(pageId);
+                if(target) {
+                    // Add specific animation class based on ID to provide individual transitions
+                    // Re-trigger animation
+                    void target.offsetWidth; // trigger reflow
+                    
+                    if(pageId.startsWith('sol-')) {
+                        target.classList.add('anim-slide-left');
+                    } else if (pageId.startsWith('prod-')) {
+                        target.classList.add('anim-fade-scale');
+                    } else {
+                        target.classList.add('anim-fade-up');
+                    }
+                    
+                    target.classList.add('active');
+                    window.scrollTo(0,0);
+                    this.state.currentPage = pageId;
+                }
+
+                // Update Nav Active State
+                document.querySelectorAll('.nav-link').forEach(el => {
+                    el.classList.remove('active');
+                    // Check if this link corresponds to page
+                    const onclickAttr = el.getAttribute('onclick');
+                    if(onclickAttr && onclickAttr.includes(`'${pageId}'`)) {
+                        el.classList.add('active');
+                    }
+                    // Specific handling for Solutions parent link vs specific sol- pages
+                    if(pageId.startsWith('sol-') && onclickAttr && onclickAttr.includes("'solutions'")) {
+                        el.classList.add('active');
+                    }
+                });
+            },
+
+            // --- 3D Tilt Effect for Cards ---
+            handleTilt: function(e, card) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Set CSS variables for glow effect
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+
+                // Calculate rotation
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg rotation
+                const rotateY = ((x - centerX) / centerX) * 5;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            },
+
+            resetTilt: function(card) {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+            },
+
+            // --- Magnetic Navigation ---
+            setupMagneticNav: function() {
+                const navItems = document.querySelectorAll('.nav-item');
+                
+                navItems.forEach(item => {
+                    item.addEventListener('mousemove', (e) => {
+                        const link = item.querySelector('.nav-link');
+                        const rect = item.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        
+                        // Move to text slightly towards to mouse
+                        link.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                    });
+
+                    item.addEventListener('mouseleave', () => {
+                        const link = item.querySelector('.nav-link');
+                        link.style.transform = `translate(0px, 0px)`;
+                    });
+                });
+            },
+
+            // --- Search Functionality ---
+            toggleSearch: function() {
+                const overlay = document.getElementById('searchOverlay');
+                const input = document.getElementById('searchInput');
+                
+                overlay.classList.toggle('active');
+                
+                if(overlay.classList.contains('active')) {
+                    setTimeout(() => input.focus(), 100);
+                }
+            },
+
+            setupSearchInput: function() {
+                const input = document.getElementById('searchInput');
+                const counter = document.getElementById('charCount');
+                const suggestionsContainer = document.getElementById('searchSuggestions');
+
+                input.addEventListener('input', (e) => {
+                    const val = e.target.value;
+                    const len = val.length;
+                    
+                    // Update counter
+                    counter.innerText = `${len} / 27`;
+                    
+                    // Predictive Logic
+                    if (len > 2) {
+                        // Filter data based on input
+                        const matches = this.searchData.filter(item => 
+                            item.name.toLowerCase().includes(val.toLowerCase())
+                        );
+
+                        // Render suggestions
+                        suggestionsContainer.innerHTML = '';
+                        
+                        if(matches.length > 0) {
+                            matches.forEach(item => {
+                                const div = document.createElement('div');
+                                div.className = 'suggestion-item';
+                                div.innerText = item.name;
+                                // Click to navigate
+                                div.onclick = () => {
+                                    app.goToSearchResult(item.name, item.page);
+                                };
+                                suggestionsContainer.appendChild(div);
+                            });
+                            suggestionsContainer.classList.add('active');
+                        } else {
+                            // No matches
+                            suggestionsContainer.classList.remove('active');
+                        }
+                    } else {
+                        suggestionsContainer.classList.remove('active');
+                    }
+                });
+            },
+
+            // Handle clicking a suggestion
+            goToSearchResult: function(name, pageId) {
+                this.toggleSearch(); // Close search
+                this.router(pageId); // Navigate
+                this.showToast(`Navigating to ${name}...`, 'success');
+                
+                // Clear input
+                const input = document.getElementById('searchInput');
+                input.value = '';
+                document.getElementById('charCount').innerText = '0 / 27';
+            },
+
+            handleSearch: function(e) {
+                e.preventDefault();
+                const input = document.getElementById('searchInput');
+                const val = input.value;
+
+                if(val.length === 0) {
+                    this.showToast('Please enter a search term.', 'error');
+                    return;
+                }
+                
+                // Since maxlength=27 is set in HTML, validation check for >27 is technically redundant 
+                // but kept for robustness in case of manual HTML modification.
+                if(val.length > 27) {
+                     this.showToast('Maximum 27 characters exceeded.', 'error');
+                     return;
+                }
+
+                // Success (if submitting form directly without clicking suggestion)
+                this.toggleSearch();
+                this.showToast('Searching...', 'success');
+                input.value = '';
+                document.getElementById('charCount').innerText = '0 / 27';
+                document.getElementById('searchSuggestions').classList.remove('active');
+            },
+
+            // --- Contact Form Submit Handler ---
+            handleContactSubmit: function(e) {
+                e.preventDefault(); // Prevent actual form submission
+                
+                // Show success message
+                this.showToast('Message sent successfully!', 'success');
+                
+                // Reset form to clear all input fields
+                e.target.reset(); 
+            },
+
+            // --- Notifications ---
+            showToast: function(msg, type) {
+                const toast = document.getElementById('toast');
+                const toastMsg = document.getElementById('toastMsg');
+                
+                toast.className = `toast ${type} show`;
+                toastMsg.innerText = msg;
+
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        };
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            app.init();
+        });
+
+        // Close search on escape key
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape') {
+                document.getElementById('searchOverlay').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
