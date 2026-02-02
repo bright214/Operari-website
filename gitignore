@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# editors
+.vscode/
+.idea/
+
+# build artifacts (if you add bundler later)
+dist/
+build/
